@@ -11,7 +11,6 @@
 		317AB1A821E9D8B500A04B68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 317AB1A721E9D8B500A04B68 /* Assets.xcassets */; };
 		317AB1AB21E9D8B500A04B68 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 317AB1A921E9D8B500A04B68 /* MainMenu.xib */; };
 		317AB1B721E9D8B500A04B68 /* IMProcessingXmp_PodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317AB1B621E9D8B500A04B68 /* IMProcessingXmp_PodTests.swift */; };
-		317AB1C221E9DC5600A04B68 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 317AB1C121E9DC5600A04B68 /* Podfile */; };
 		EF4619A67F4A9BF39D1E2749 /* Pods_IMProcessingXmp_Pod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9E68E7142D8281DF61782 /* Pods_IMProcessingXmp_Pod.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +34,6 @@
 		317AB1B221E9D8B500A04B68 /* IMProcessingXmp-PodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IMProcessingXmp-PodTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		317AB1B621E9D8B500A04B68 /* IMProcessingXmp_PodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMProcessingXmp_PodTests.swift; sourceTree = "<group>"; };
 		317AB1B821E9D8B500A04B68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		317AB1C121E9DC5600A04B68 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		38018C04CBC2655677F848D6 /* Pods-IMProcessingXmp-Pod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMProcessingXmp-Pod.debug.xcconfig"; path = "Target Support Files/Pods-IMProcessingXmp-Pod/Pods-IMProcessingXmp-Pod.debug.xcconfig"; sourceTree = "<group>"; };
 		38F9E68E7142D8281DF61782 /* Pods_IMProcessingXmp_Pod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMProcessingXmp_Pod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D5547531647A7396B8A786 /* Pods-IMProcessingXmp-Pod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMProcessingXmp-Pod.release.xcconfig"; path = "Target Support Files/Pods-IMProcessingXmp-Pod/Pods-IMProcessingXmp-Pod.release.xcconfig"; sourceTree = "<group>"; };
@@ -72,7 +70,6 @@
 		317AB19921E9D8B400A04B68 = {
 			isa = PBXGroup;
 			children = (
-				317AB1C121E9DC5600A04B68 /* Podfile */,
 				317AB1A421E9D8B500A04B68 /* IMProcessingXmp-Pod */,
 				317AB1B521E9D8B500A04B68 /* IMProcessingXmp-PodTests */,
 				317AB1A321E9D8B500A04B68 /* Products */,
@@ -202,7 +199,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				317AB1C221E9DC5600A04B68 /* Podfile in Resources */,
 				317AB1A821E9D8B500A04B68 /* Assets.xcassets in Resources */,
 				317AB1AB21E9D8B500A04B68 /* MainMenu.xib in Resources */,
 			);
