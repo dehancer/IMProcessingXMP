@@ -1,6 +1,6 @@
 //
-//  DHCImageMetaRaw.m
-//  DehancerUIKit
+//  ImageMetaRaw.m
+//  IMProcessingXMP
 //
 //  Created by denis svinarchuk on 03.11.17.
 //

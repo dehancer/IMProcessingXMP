@@ -16,22 +16,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        let type:LutType           = .mlut
 
-        Swift.print(".... ")
-        
-        let raw = ImageMetaRaw()
-        
-        raw.bias = 1
-        
-        let meta = ImageMeta(path: "/tmp/test_meta.xmp")
-        meta.historyLength = 100
-        
+        let meta = ImageMeta(path: "/tmp/ImageMeta", extension: "xmp", history:100)
+     
         do {
-            try meta.setField(raw)
+            try meta.setField(type.model)
         }
         catch let error as NSError {
-            Swift.print(" error \(error)")
+            Swift.print("Error: \(error)")
         }
+        
         
     }
 
@@ -39,6 +34,37 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
-
+    @IBAction func openImage(_ sender: NSMenuItem) {
+        if openPanel.runModal() == NSApplication.ModalResponse.OK {
+            if let url = openPanel.urls.first {
+                
+                Swift.print("image \(url.path)")
+                
+                let raw = ImageMetaRaw()
+                
+                raw.bias = 1
+                
+                let meta = ImageMeta(path: url.path)
+                
+                do {
+                    try meta.setField(raw)
+                }
+                catch let error as NSError {
+                    Swift.print(" error \(error)")
+                }
+            }
+        }
+    }
+    
+    lazy var openPanel:NSOpenPanel = {
+        let p = NSOpenPanel()
+        p.canChooseFiles = true
+        p.canChooseDirectories = false
+        p.resolvesAliases = true
+        p.isExtensionHidden = false
+        p.allowedFileTypes = ["jpeg", "jpg"]
+        return p
+    }()
+    
 }
 

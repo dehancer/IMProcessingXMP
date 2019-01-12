@@ -1,6 +1,6 @@
 //
-//  DHCImageMetaField.h
-//  DehancerUIKit
+//  ImageMetaField.h
+//  IMProcessingXMP
 //
 //  Created by denis svinarchuk on 03.11.17.
 //
@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Get property list types
  *
- *  @return [DHCImageMetaType].
+ *  @return [ImageMetaType].
  */
 - (NSArray*_Nullable) propertyList;
 

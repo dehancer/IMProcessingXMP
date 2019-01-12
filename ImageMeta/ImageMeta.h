@@ -8,12 +8,12 @@
 #import <Foundation/Foundation.h>
 #import "ImageMetaField.h"
 
-typedef NS_ENUM(int, DHCImageMetaState) {
-    DHCImageMetaOk        = 0,
-    DHCImageMetaXmpOk     = 1,
-    DHCImageMetaNotOpened,
-    DHCImageMetaProtected,
-    DHCImageMetaCorrupted
+typedef NS_ENUM(int, ImageMetaState) {
+    ImageMetaOk        = 0,
+    ImageMetaXmpOk     = 1,
+    ImageMetaNotOpened,
+    ImageMetaProtected,
+    ImageMetaCorrupted
 };
 
 @interface ImageMeta : NSObject
@@ -29,21 +29,21 @@ typedef NS_ENUM(int, DHCImageMetaState) {
                             extension:(nullable NSString*)ext
                               history:(NSInteger)length;
 
-@property DHCImageMetaState state;
+@property ImageMetaState state;
 
 
 @property NSInteger         historyLength;
 @property int               error;
 
 - (nullable instancetype) setField:(ImageMetaField*_Nonnull)value
-                             error:(NSError *_Nullable*_Nullable)error;
+                             error:(NSError **)error;
 
 - (nullable ImageMetaField*) getField:(Class _Nonnull )valueClass
                                  fieldId:(nullable NSString*)fieldId
-                                   error:(NSError *_Nullable*_Nullable)error;
+                                   error:(NSError **)error;
 
 - (nullable NSArray*)   getFieldUndoHistory:(Class _Nonnull )valueClass
                                     fieldId:(nullable NSString*)fieldId
-                                      error:(NSError *_Nullable*_Nullable)error;
+                                      error:(NSError **)error;
 
 @end

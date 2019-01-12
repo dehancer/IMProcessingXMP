@@ -1,6 +1,6 @@
 //
-//  DHCImageMetaRegistry.cpp
-//  DehancerUIKit
+//  ImageMetaRegistry.cpp
+//  IMProcessingXMP
 //
 //  Created by denis svinarchuk on 03.11.17.
 //

@@ -1,6 +1,6 @@
 //
-//  DHCImageMeta.m
-//  DehancerUIKit
+//  ImageMeta.m
+//  IMProcessingXMP
 //
 //  Created by denis svinarchuk on 30.10.17.
 //
@@ -19,29 +19,27 @@
 #include <iostream>
 #include <fstream>
 
-#define XMP_INCLUDE_XMPFILES 1 
+#define XMP_INCLUDE_XMPFILES 1
 #define TXMP_STRING_TYPE std::string
 #include "XMP_incl.hpp"
 #include "XMP.hpp"
 
 const char* kDHC_UNKNOWN_ERROR_STR = "Unknown error"; 
 
-DHCImageMetaState stateFrom(int code) {
+ImageMetaState stateFrom(int code) {
     switch (code) {
         case EPERM:            
-            return DHCImageMetaProtected;
+            return ImageMetaProtected;
         case ENOENT:
         case EIO:
-            return DHCImageMetaNotOpened;
+            return ImageMetaNotOpened;
         default:
-            return DHCImageMetaCorrupted;
+            return ImageMetaCorrupted;
     }
 }
 
-
 @interface ImageMeta()
 @property (atomic) NSUInteger serial;
-//@property NSString          * _Nullable errorString;
 @end
 
 @implementation ImageMeta
@@ -77,10 +75,10 @@ DHCImageMetaState stateFrom(int code) {
     }  
 }
 
-- (void) open:(NSError *_Nullable*_Nullable)error{
+- (nullable instancetype) open:(NSError **)error{
     
     if (sourceFileIsOk) {
-        return;
+        return self;
     }     
     
     try
@@ -94,21 +92,23 @@ DHCImageMetaState stateFrom(int code) {
             sourceFileIsOk = sourceFile.OpenFile(filename, kXMP_UnknownFile, opts);
         }   
         
-        
-        [self read: error];
-        
+        return [self read: error];
     }
     catch(XMP_Error & warn)
     {
-        [self read: error];
-        [self warning:DHCImageMetaProtected errorString:warn.GetErrMsg() fileName:filename.c_str() line:__LINE__];
+        return [self read: error];
+        [self warning:ImageMetaProtected errorString:warn.GetErrMsg() fileName:filename.c_str() line:__LINE__];
     }        
     catch(...) {
         [self perror:stateFrom(errno) errorString:kDHC_UNKNOWN_ERROR_STR error:error fileName:filename.c_str() line:__LINE__];
-    }    
+        return nil;
+    }
+    
+    return self;
 }
 
-- (void) flush:(NSError *_Nullable*_Nullable)error {
+- (nullable instancetype) flush:(NSError **)error {
+    
     try{
         if (sourceFileIsOk && changeCount>0) {
             if (sourceFile.CanPutXMP(meta)) {
@@ -117,15 +117,15 @@ DHCImageMetaState stateFrom(int code) {
                 sourceFileIsOk = false;
             }
             else {
-                self.state = DHCImageMetaProtected;
+                self.state = ImageMetaProtected;
                 if (changeCount>0){
-                    [self writeRDFToFile:meta filename:xmpFilename error:error];
+                    return [self writeRDFToFile:meta filename:xmpFilename error:error];
                 }
             }
         }  
         else {
             if (changeCount>0){
-                [self writeRDFToFile:meta filename:xmpFilename error:error];
+                return [self writeRDFToFile:meta filename:xmpFilename error:error];
             }
         }
     }
@@ -135,10 +135,12 @@ DHCImageMetaState stateFrom(int code) {
     }            
     catch(...) {
         [self perror:stateFrom(errno) errorString:kDHC_UNKNOWN_ERROR_STR error:error fileName:filename.c_str() line:__LINE__];
-    }      
+    }
+    
+    return nil;
 }
 
-- (void) read:(NSError *_Nullable*_Nullable)error {
+- (nullable instancetype) read:(NSError **)error {
     if(sourceFileIsOk && sourceFile.CanPutXMP(meta))
     {
         try {
@@ -149,24 +151,27 @@ DHCImageMetaState stateFrom(int code) {
                 meta.SetProperty( kXMP_NS_DC, "CreatorTool", kDHC_CREATOR_TOOL, NULL );
             }
             
-            self.state = DHCImageMetaOk;
+            self.state = ImageMetaOk;
         }
         catch(XMP_Error & err)
         {            
             [self perror:stateFrom(errno) errorString:err.GetErrMsg() error:error fileName:filename.c_str() line:__LINE__];
+            return nil;
         }   
         changeCount = 0;
     }
     else
     {
         if ([self readRDFFromFile:meta filename:xmpFilename error:error]) {
-            self.state = DHCImageMetaXmpOk;
+            self.state = ImageMetaXmpOk;
             changeCount = 0;
         }
         else {
-            self.state = DHCImageMetaNotOpened;
+            self.state = ImageMetaNotOpened;
         }
     }
+    
+    return self;
 }
 
 - (instancetype) initWithPath:(NSString *)aPath
@@ -227,10 +232,9 @@ DHCImageMetaState stateFrom(int code) {
     return  [propname UTF8String];    
 }
 
-- (nullable instancetype) setField:(ImageMetaField*)value error:(NSError *_Nullable*_Nullable)error {
-    
+- (nullable instancetype) setField:(ImageMetaField*)value error:(NSError **)error {
+
     const char *name = [self structureUndoName:value];
-    
     NSDictionary *dict = [value dictionary];
     std::string correctionsItemPath;
     
@@ -291,13 +295,13 @@ DHCImageMetaState stateFrom(int code) {
                     if ([object isKindOfClass:[NSString class]]) {
                         asString = object;
                         NSAssert(type == nil || [type isEqualToString:@"string"],
-                                 @"DHCImageMeta should not have different types in array properties");
+                                 @"ImageMeta should not have different types in array properties");
                         type = @"string";
                     }
                     else if ([object isKindOfClass:[NSNumber class]]){
                         asString = [object stringValue];
                         NSAssert(type == nil || [type isEqualToString:@"number"],
-                                 @"DHCImageMeta should not have different types in array properties");
+                                 @"ImageMeta should not have different types in array properties");
                         type = @"number";                        
                     }
                     if (asString!=nil){
@@ -329,7 +333,7 @@ DHCImageMetaState stateFrom(int code) {
         
         changeCount++;
         
-        [self flush: error];
+        return [self flush: error];
     }
     catch(XMP_Error & err)
     {            
@@ -340,12 +344,13 @@ DHCImageMetaState stateFrom(int code) {
         [self perror:stateFrom(errno) errorString:kDHC_UNKNOWN_ERROR_STR error:error fileName:filename.c_str() line:__LINE__];
     }
     
-    return self;
+    return nil;
 }
 
 - (nullable NSArray*)  getFieldUndoHistory:(Class)valueClass
                                    fieldId:(nullable NSString*)fieldId
-                                     error:(NSError *_Nullable*_Nullable)error{
+                                     error:(NSError **)error{
+    
     try {
 
         [self open: error];
@@ -368,7 +373,7 @@ DHCImageMetaState stateFrom(int code) {
             }
             catch(XMP_Error & error)
             {      
-                NSLog(@"DHCImageMeta erro: %s", error.GetErrMsg());
+                NSLog(@"ImageMeta error: %s", error.GetErrMsg());
                 
             }
         }
@@ -390,7 +395,7 @@ DHCImageMetaState stateFrom(int code) {
 - (ImageMetaField*)   getField:(Class)valueClass
                                at:(XMP_Index)index
                           fieldId:(nullable NSString*)fieldId
-                            error:(NSError *_Nullable*_Nullable)error{
+                            error:(NSError **)error{
     
     if (![valueClass isSubclassOfClass:[ImageMetaField class]]) {
         return nil;
@@ -399,7 +404,6 @@ DHCImageMetaState stateFrom(int code) {
     try {   
         [self open: error];
 
-        //DHCImageMetaField *value = [[valueClass alloc] init];
         ImageMetaField *value = [[valueClass alloc] initWithId:fieldId];
         
         if ( value == nil ) {
@@ -466,7 +470,7 @@ DHCImageMetaState stateFrom(int code) {
                     }
                     catch(XMP_Error & error)
                     {            
-                        [self warning:DHCImageMetaOk errorString:error.GetErrMsg() fileName:keyPath.c_str() line:__LINE__];
+                        [self warning:ImageMetaOk errorString:error.GetErrMsg() fileName:keyPath.c_str() line:__LINE__];
                         continue;
                     }   
                 }
@@ -521,7 +525,7 @@ DHCImageMetaState stateFrom(int code) {
     }
     catch(XMP_Error & err)
     {            
-        [self perror:DHCImageMetaCorrupted errorString:err.GetErrMsg() error:error fileName:filename.c_str() line:__LINE__];
+        [self perror:ImageMetaCorrupted errorString:err.GetErrMsg() error:error fileName:filename.c_str() line:__LINE__];
     }        
     catch(...)
     {            
@@ -537,11 +541,12 @@ DHCImageMetaState stateFrom(int code) {
 
 - (ImageMetaField*)   getField:(Class)valueClass
                           fieldId:(nullable NSString*)fieldId
-                            error:(NSError *_Nullable*_Nullable)error{
+                            error:(NSError **)error{
     return [self getField:valueClass at:kXMP_ArrayLastItem fieldId:fieldId error:error];
 }
 
-- (void) writeRDFToFile:(SXMPMeta&)meta filename:(const std::string&)filename error:(NSError *_Nullable*_Nullable)error{
+- (nullable instancetype) writeRDFToFile:(SXMPMeta&)meta filename:(const std::string&)filename error:(NSError **)error{
+    
     try {
         std::string metaBuffer;
         
@@ -559,7 +564,9 @@ DHCImageMetaState stateFrom(int code) {
         
         outFile.open(filename.c_str(), std::ios::out);
         outFile << metaBuffer;
-        outFile.close();        
+        outFile.close();
+        
+        return self;
     }
     catch(XMP_Error & err)
     {            
@@ -574,9 +581,11 @@ DHCImageMetaState stateFrom(int code) {
     catch (...) {
         [self perror:stateFrom(errno) errorString:kDHC_UNKNOWN_ERROR_STR error:error fileName:filename.c_str() line:__LINE__];
     }
+    
+    return nil;
 }
 
-- (bool) readRDFFromFile:(SXMPMeta &)meta filename:(const std::string&) filename error:(NSError *_Nullable*_Nullable)error{
+- (bool) readRDFFromFile:(SXMPMeta &)meta filename:(const std::string&) filename error:(NSError **)error{
     try {
         
         std::string metaBuffer;        
@@ -622,11 +631,12 @@ DHCImageMetaState stateFrom(int code) {
     return false;
 }
 
-- (void) perror:(DHCImageMetaState)aState
+- (void) perror:(ImageMetaState)aState
     errorString:(const char* )errorString
           error:(NSError **)error
        fileName:(const char*)_filename
            line:(int)line {
+    
     self.error = errno;
     self.state = aState;
     
@@ -637,17 +647,16 @@ DHCImageMetaState stateFrom(int code) {
                                             NSLocalizedDescriptionKey: @(errorString),
                                             NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Format error", comment:"")
                                             }];
-    
 #if DEBUG_XMP
-    NSLog(@"DHCImageMeta error/state(%i/%i): %@:%s, %s:%i", self.error, aState, errorString, _filename, __FILE__, line);
+    NSLog(@"ImageMeta error/state(%i/%i): %@:%@, %s:%i", self.error, aState, @(errorString), @(_filename), __FILE__, line);
 #endif
 }
 
-- (void) warning:(DHCImageMetaState)aState errorString:(const char* )error fileName:(const char*)_filename line:(int)line {
+- (void) warning:(ImageMetaState)aState errorString:(const char* )error fileName:(const char*)_filename line:(int)line {
     self.error = errno;
     self.state = aState;
 #if DEBUG_XMP
-    NSLog(@"DHCImageMeta error/state(%i/%i): %@:%s, %s:%i", self.error, aState, errorString, _filename, __FILE__, line);
+    NSLog(@"ImageMeta warning/state(%i/%i): %@, %s:%i", self.error, aState, @(_filename), __FILE__, line);
 #endif
 }
 @end
