@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
     s.name         = "IMProcessingXMP"
     
-    s.version      = "1.0.1"
+    s.version      = "1.0.2"
     
     s.summary      = "Adobe’s XMPToolkit wrapper for OS X. Version 5.6.0"
     
@@ -17,8 +17,8 @@ Pod::Spec.new do |s|
     
     s.osx.deployment_target   = '10.11'
     
-    s.osx.source_files         = 'ImageMeta/*.{h,m,mm}', 'include-macos/xmpsdk/**/*.{h,hpp}'
-    s.osx.public_header_files  = 'ImageMeta/*.{h,hpp}'
+    s.osx.source_files         = 'Classes/ImageMeta/*.{h,m,mm}', 'include-macos/xmpsdk/**/*.{h,hpp}'
+    s.osx.public_header_files  = 'Classes/ImageMeta/*.{h,hpp}'
     s.osx.private_header_files = 'include-macos/xmpsdk/**/*.h'
 
     s.osx.header_dir          = 'xmpsdk'
