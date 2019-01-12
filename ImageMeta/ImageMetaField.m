@@ -1,6 +1,6 @@
 //
-//  DHCImageMetaField.m
-//  DehancerUIKit
+//  ImageMetaField.m
+//  IMProcessingXMP
 //
 //  Created by denis svinarchuk on 03.11.17.
 //
