@@ -256,8 +256,12 @@ ImageMetaState stateFrom(int code) {
                 continue;
             }
             
+            if ([key isEqualToString:@"serial"]){
+                continue;
+            }
+            
             const char *propName =  [self fieldName:key]; 
-                        
+            
             // Compose a path to the exposure and set field value
             std::string keyPath;
             SXMPUtils::ComposeStructFieldPath(kDHC_NS_SDK, correctionsItemPath.c_str(), kXMP_NS_RDF, propName, &keyPath);
@@ -266,23 +270,24 @@ ImageMetaState stateFrom(int code) {
             
             if (obj == nil) { continue; }
             if ([obj isKindOfClass:[NSNumber class]]){
-                NSNumber *number = obj;     
                 
-                if (strcmp([number objCType], @encode(BOOL))==0){
+                NSNumber *number = obj;
+                std::string _c_type([number objCType]);
+                
+                if (strcmp(_c_type.c_str(), @encode(BOOL))==0){
                     meta.SetProperty_Bool(kDHC_NS_SDK, keyPath.c_str(), [number boolValue]);
                 }
-                else if (strcmp([number objCType], @encode(int))==0){
+                else if (strcmp(_c_type.c_str(), @encode(int))==0){
                     meta.SetProperty_Int(kDHC_NS_SDK, keyPath.c_str(), [number intValue]);                    
                 }
-                else if (strcmp([number objCType], @encode(NSInteger))==0){
+                else if (strcmp(_c_type.c_str(), @encode(NSInteger))==0){
                     meta.SetProperty_Int64(kDHC_NS_SDK, keyPath.c_str(), [number integerValue]);                    
                 }
                 else {
                     meta.SetProperty_Float(kDHC_NS_SDK, keyPath.c_str(), [number doubleValue], 0);
                 }
                 
-                meta.SetQualifier(kDHC_NS_SDK, keyPath.c_str(), kXMP_NS_XMP_IdentifierQual, kDHC_NS_QUAL_TYPE, [number objCType]);
-
+                meta.SetQualifier(kDHC_NS_SDK, keyPath.c_str(), kXMP_NS_XMP_IdentifierQual, kDHC_NS_QUAL_TYPE, _c_type.c_str());
             }
             else if ([obj isKindOfClass:[NSString class]]) {
                 NSString *string = obj;
@@ -308,16 +313,18 @@ ImageMetaState stateFrom(int code) {
                         meta.AppendArrayItem(kDHC_NS_SDK, keyPath.c_str(), kXMP_PropValueIsArray, [asString UTF8String]);
                     }
                 }
+                
                 meta.SetQualifier(kDHC_NS_SDK, keyPath.c_str(), kXMP_NS_XMP_IdentifierQual, kDHC_NS_QUAL_TYPE, [type UTF8String]);
+                
             }
         }
         
         // Update the Metadata Date
         XMP_DateTime updatedTime;
-        // Get the current time.  This is a UTC time automatically 
+        // Get the current time.  This is a UTC time automatically
         // adjusted for the local time
         SXMPUtils::CurrentDateTime(&updatedTime);
-        
+
         std::string keyPath;
         SXMPUtils::ComposeStructFieldPath(kDHC_NS_SDK, correctionsItemPath.c_str(), kXMP_NS_RDF, "datetime", &keyPath);
         meta.SetProperty_Date(kDHC_NS_SDK, keyPath.c_str(), updatedTime, 0);
@@ -329,7 +336,7 @@ ImageMetaState stateFrom(int code) {
         
         for (NSInteger i=1; i<=count-self.historyLength; i++) {
             meta.DeleteArrayItem(kDHC_NS_SDK, name, (XMP_Int32)i);
-        }       
+        }
         
         changeCount++;
         
@@ -465,14 +472,16 @@ ImageMetaState stateFrom(int code) {
                             bool exist = meta.GetProperty_Float(kDHC_NS_SDK,  keyPath.c_str(), &theValue, NULL);
                             if (exist){
                                 number = [NSNumber numberWithDouble:theValue];
-                            }                        
+                            }
                         }
                     }
-                    catch(XMP_Error & error)
-                    {            
-                        [self warning:ImageMetaOk errorString:error.GetErrMsg() fileName:keyPath.c_str() line:__LINE__];
+                    catch(XMP_Error & err)
+                    {
+                        [self warning:ImageMetaOk errorString:err.GetErrMsg() fileName:keyPath.c_str() line:__LINE__];
                         continue;
-                    }   
+                        //[self perror:stateFrom(errno) errorString:err.GetErrMsg() error:error fileName:filename.c_str() line:__LINE__];
+                        //return nil;
+                    }
                 }
                 if (number != nil ) {
                     [value setValue:number forKey:key];
@@ -555,7 +564,7 @@ ImageMetaState stateFrom(int code) {
         //meta.SerializeToBuffer(&metaBuffer, 0, 0, "", "", 0);
         
         // Write the packet to a file but this time as compact RDF
-        XMP_OptionBits outOpts = kXMP_OmitPacketWrapper | kXMP_UseCompactFormat;
+        XMP_OptionBits outOpts = kXMP_OmitPacketWrapper | kXMP_UseCompactFormat | kXMP_UseCanonicalFormat; // | kXMP_EncodeUTF8;
         meta.SerializeToBuffer(&metaBuffer, outOpts);
         
         std::ofstream outFile;
@@ -565,6 +574,8 @@ ImageMetaState stateFrom(int code) {
         outFile.open(filename.c_str(), std::ios::out);
         outFile << metaBuffer;
         outFile.close();
+        
+        NSString *c = [NSString stringWithUTF8String:metaBuffer.c_str()];
         
         return self;
     }
