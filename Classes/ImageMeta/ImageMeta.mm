@@ -83,12 +83,12 @@ ImageMetaState stateFrom(int code) {
     
     try
     {            
-        XMP_OptionBits opts = kXMPFiles_OpenForUpdate | kXMPFiles_OpenUsePacketScanning; //kXMPFiles_OpenUseSmartHandler ;
+        XMP_OptionBits opts = kXMPFiles_OpenForUpdate | kXMPFiles_OpenUseSmartHandler ;
         sourceFileIsOk = sourceFile.OpenFile(filename, kXMP_UnknownFile, opts);
         if( ! sourceFileIsOk )
         {
             // Now try using packet scanning
-            opts = kXMPFiles_OpenForUpdate | kXMPFiles_OpenUseSmartHandler;
+            opts = kXMPFiles_OpenForUpdate | kXMPFiles_OpenUsePacketScanning;
             sourceFileIsOk = sourceFile.OpenFile(filename, kXMP_UnknownFile, opts);
         }   
         
@@ -564,7 +564,7 @@ ImageMetaState stateFrom(int code) {
         //meta.SerializeToBuffer(&metaBuffer, 0, 0, "", "", 0);
         
         // Write the packet to a file but this time as compact RDF
-        XMP_OptionBits outOpts = kXMP_OmitPacketWrapper | kXMP_UseCompactFormat | kXMP_UseCanonicalFormat | kXMP_EncodeUTF8;
+        XMP_OptionBits outOpts = kXMP_OmitPacketWrapper | kXMP_UseCompactFormat | kXMP_UseCanonicalFormat; // | kXMP_EncodeUTF8;
         meta.SerializeToBuffer(&metaBuffer, outOpts);
         
         std::ofstream outFile;
