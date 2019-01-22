@@ -44,7 +44,8 @@ ImageMetaState stateFrom(int code) {
 
 @implementation ImageMeta
 {
-    NSURL       *url;
+    NSURL       *sourceUrl;
+    NSURL       *xmpUrl;
     NSInteger   changeCount;
     
     std::string  filename;
@@ -57,9 +58,12 @@ ImageMetaState stateFrom(int code) {
     NSISO8601DateFormatter *formatter;
 }
 
-//@synthesize errorString = _errorString;
 @synthesize state = _state;
 @synthesize historyLength = _historyLength;
+
+- (NSURL*) url {
+    return self->xmpUrl;
+}
 
 - (void)dealloc
 {
@@ -90,6 +94,8 @@ ImageMetaState stateFrom(int code) {
             // Now try using packet scanning
             opts = kXMPFiles_OpenForUpdate | kXMPFiles_OpenUsePacketScanning;
             sourceFileIsOk = sourceFile.OpenFile(filename, kXMP_UnknownFile, opts);
+        
+            xmpUrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:filename.c_str()]];
         }   
         
         return [self read: error];
@@ -107,6 +113,8 @@ ImageMetaState stateFrom(int code) {
     return self;
 }
 
+//- (NSURL*)
+
 - (nullable instancetype) flush:(NSError **)error {
     
     try{
@@ -115,6 +123,7 @@ ImageMetaState stateFrom(int code) {
                 sourceFile.PutXMP(meta);
                 sourceFile.CloseFile();
                 sourceFileIsOk = false;
+                xmpUrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:filename.c_str()]];
             }
             else {
                 self.state = ImageMetaProtected;
@@ -128,6 +137,8 @@ ImageMetaState stateFrom(int code) {
                 return [self writeRDFToFile:meta filename:xmpFilename error:error];
             }
         }
+        
+        return self;
     }
     catch(XMP_Error & err)
     {            
@@ -186,8 +197,8 @@ ImageMetaState stateFrom(int code) {
         
         _historyLength = length;
         
-        url = [NSURL fileURLWithPath:aPath];
-        xmpFilename = std::string( [[[url URLByDeletingPathExtension] path] UTF8String]);
+        sourceUrl = [NSURL fileURLWithPath:aPath];
+        xmpFilename = std::string( [[[sourceUrl URLByDeletingPathExtension] path] UTF8String]);
         if (ext == nil){
             xmpFilename += ".xmp";
         }
@@ -195,7 +206,7 @@ ImageMetaState stateFrom(int code) {
             xmpFilename += ".";
             xmpFilename += [ext UTF8String];
         }
-        filename = std::string( [[url path] UTF8String]);
+        filename = std::string( [[sourceUrl path] UTF8String]);
         
         sourceFileIsOk = false;
         
@@ -577,6 +588,8 @@ ImageMetaState stateFrom(int code) {
         
         NSString *c = [NSString stringWithUTF8String:metaBuffer.c_str()];
         
+        xmpUrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:filename.c_str()]];
+
         return self;
     }
     catch(XMP_Error & err)
@@ -658,7 +671,7 @@ ImageMetaState stateFrom(int code) {
                                             NSLocalizedDescriptionKey: @(errorString),
                                             NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"Format error", comment:"")
                                             }];
-#if DEBUG_XMP
+#if DEBUG_XMP || DEBUG
     NSLog(@"ImageMeta error/state(%i/%i): %@:%@, %s:%i", self.error, aState, @(errorString), @(_filename), __FILE__, line);
 #endif
 }
@@ -666,7 +679,7 @@ ImageMetaState stateFrom(int code) {
 - (void) warning:(ImageMetaState)aState errorString:(const char* )error fileName:(const char*)_filename line:(int)line {
     self.error = errno;
     self.state = aState;
-#if DEBUG_XMP
+#if DEBUG_XMP || DEBUG
     NSLog(@"ImageMeta warning/state(%i/%i): %@, %s:%i", self.error, aState, @(_filename), __FILE__, line);
 #endif
 }
