@@ -38,14 +38,14 @@ typedef NS_ENUM(int, ImageMetaState) {
                               history:(NSInteger)length;
     
 - (nullable instancetype) setField:(ImageMetaField*_Nonnull)value
-                             error:(NSError **)error;
+                             error:(NSError * _Nullable * _Nullable)error;
     
 - (nullable ImageMetaField*) getField:(Class _Nonnull )valueClass
                               fieldId:(nullable NSString*)fieldId
-                                error:(NSError **)error;
+                                error:(NSError * _Nullable * _Nullable)error;
     
 - (nullable NSArray*)   getFieldUndoHistory:(Class _Nonnull )valueClass
                                     fieldId:(nullable NSString*)fieldId
-                                      error:(NSError **)error;
+                                      error:(NSError * _Nullable * _Nullable)error;
     
     @end
