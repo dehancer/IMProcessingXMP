@@ -16,7 +16,29 @@ target 'IMProcessingXmp-Pod' do
     #
     # pod 'IMProcessingXMP', :git => 'https://github.com/dehancer/IMProcessingXMP'
     
+    pod 'DehancerCommon', :path => '../../../Dehancer-Plugins/dehancer-common-cpp', :configurations => ['Debug']
+    #pod 'DehancerdClient',  :path => '../../../Dehancer-Services/DehancerdClient', :configurations => ['Debug']
+
 end
+
+target "XmpObjcTest-Pod" do
+    inherit! :search_paths
+    
+    #
+    # develop ode
+    #
+    pod 'IMProcessingXMP', :path => '../../'
+    
+    #
+    # release
+    #
+    # pod 'IMProcessingXMP', :git => 'https://github.com/dehancer/IMProcessingXMP'
+    
+    pod 'DehancerCommon', :path => '../../../Dehancer-Plugins/dehancer-common-cpp', :configurations => ['Debug']
+    #pod 'DehancerdClient',  :path => '../../../Dehancer-Services/DehancerdClient', :configurations => ['Debug']
+
+end
+
 
 target 'IMProcessingXmp-PodTests' do
   inherit! :search_paths

@@ -24,7 +24,12 @@
 #include "XMP_incl.hpp"
 #include "XMP.hpp"
 
-const char* kDHC_UNKNOWN_ERROR_STR = "Unknown error"; 
+const char* kDHC_UNKNOWN_ERROR_STR = "Unknown error";
+
+//static bool __XMPFiles_ErrorCallbackProc ( void* context, XMP_StringPtr filePath, XMP_ErrorSeverity severity, XMP_Int32 cause, XMP_StringPtr message ) {
+//    NSLog(@"File error: %@ code: %i, message: %@", @(filePath), cause, @(message));
+//    return false;
+//}
 
 ImageMetaState stateFrom(int code) {
     switch (code) {
@@ -52,7 +57,7 @@ ImageMetaState stateFrom(int code) {
     std::string  xmpFilename;
     
     bool         sourceFileIsOk;
-    SXMPFiles    sourceFile;            
+    SXMPFiles   *sourceFile;
     SXMPMeta     meta;
     
     NSISO8601DateFormatter *formatter;
@@ -70,8 +75,11 @@ ImageMetaState stateFrom(int code) {
     try{
         [self flush: nil];
         if (sourceFileIsOk) {
-            sourceFile.CloseFile();
+            sourceFile->CloseFile();
             sourceFileIsOk = false;
+        }
+        if (sourceFile) {
+            delete sourceFile;
         }
     }
     catch(...) {
@@ -88,12 +96,14 @@ ImageMetaState stateFrom(int code) {
     try
     {            
         XMP_OptionBits opts = kXMPFiles_OpenForUpdate | kXMPFiles_OpenUseSmartHandler ;
-        sourceFileIsOk = sourceFile.OpenFile(filename, kXMP_UnknownFile, opts);
+        
+        sourceFileIsOk = sourceFile->OpenFile(filename, kXMP_UnknownFile, opts);
+                
         if( ! sourceFileIsOk )
         {
             // Now try using packet scanning
             opts = kXMPFiles_OpenForUpdate | kXMPFiles_OpenUsePacketScanning;
-            sourceFileIsOk = sourceFile.OpenFile(filename, kXMP_UnknownFile, opts);
+            sourceFileIsOk = sourceFile->OpenFile(filename, kXMP_UnknownFile, opts);
         
             xmpUrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:filename.c_str()]];
         }   
@@ -119,9 +129,9 @@ ImageMetaState stateFrom(int code) {
     
     try{
         if (sourceFileIsOk && changeCount>0) {
-            if (sourceFile.CanPutXMP(meta)) {
-                sourceFile.PutXMP(meta);
-                sourceFile.CloseFile();
+            if (sourceFile->CanPutXMP(meta)) {
+                sourceFile->PutXMP(meta);
+                sourceFile->CloseFile();
                 sourceFileIsOk = false;
                 xmpUrl = [NSURL fileURLWithPath:[NSString stringWithUTF8String:filename.c_str()]];
             }
@@ -152,11 +162,10 @@ ImageMetaState stateFrom(int code) {
 }
 
 - (nullable instancetype) read:(NSError **)error {
-    if(sourceFileIsOk && sourceFile.CanPutXMP(meta))
-    {
+    if(sourceFileIsOk && sourceFile->CanPutXMP(meta)) {
         try {
-            // Create the xmp object and get the xmp data
-            sourceFile.GetXMP(&meta);  
+                // Create the xmp object and get the xmp data
+            sourceFile->GetXMP(&meta);
             
             if(meta.DoesPropertyExist( kXMP_NS_DC, "CreatorTool" )){
                 meta.SetProperty( kXMP_NS_DC, "CreatorTool", kDHC_CREATOR_TOOL, NULL );
@@ -164,15 +173,17 @@ ImageMetaState stateFrom(int code) {
             
             self.state = ImageMetaOk;
         }
-        catch(XMP_Error & err)
-        {            
+        catch(XMP_Error & err){
             [self perror:stateFrom(errno) errorString:err.GetErrMsg() error:error fileName:filename.c_str() line:__LINE__];
             return nil;
-        }   
+        }
+        catch(...) {
+            [self perror:stateFrom(errno) errorString:kDHC_UNKNOWN_ERROR_STR error:error fileName:filename.c_str() line:__LINE__];
+            return nil;
+        }
         changeCount = 0;
     }
-    else
-    {
+    else {
         if ([self readRDFFromFile:meta filename:xmpFilename error:error]) {
             self.state = ImageMetaXmpOk;
             changeCount = 0;
@@ -188,6 +199,12 @@ ImageMetaState stateFrom(int code) {
 - (instancetype) initWithPath:(NSString *)aPath
                     extension:(NSString *)ext
                       history:(NSInteger)length {
+    
+    sourceFile = new SXMPFiles;
+    
+    //sourceFile->SetErrorCallback(__XMPFiles_ErrorCallbackProc, 0, 1);//
+    //SXMPFiles::SetDefaultErrorCallback(__XMPFiles_ErrorCallbackProc);
+
     self = [super init];
     if (self) {
         

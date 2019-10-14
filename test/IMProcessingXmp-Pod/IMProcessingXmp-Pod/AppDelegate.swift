@@ -17,10 +17,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let type:LutType           = .mlut
-
-        let meta = ImageMeta(path: "/tmp/ImageMeta", extension: "xmp", history:100)
      
         do {
+            let meta = try ImageMeta(path: "/tmp/ImageMeta", extension: "xmp", history:100)
             try meta.setField(type.model)
         }
         catch let error as NSError {

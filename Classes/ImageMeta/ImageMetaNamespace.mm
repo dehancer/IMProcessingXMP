@@ -22,6 +22,10 @@ using namespace std;
 #include "XMP_incl.hpp"
 #include "XMP.hpp"
 
+//static  bool __XMPMeta_ErrorCallbackProc ( void* context, XMP_ErrorSeverity severity, XMP_Int32 cause, XMP_StringPtr message ) {
+//    NSLog(@"File error: code: %i, message: %@", cause, @(message));
+//    return false;
+//}
 
 @implementation ImageMetaNamespace
 
@@ -42,14 +46,14 @@ using namespace std;
 
 - (id)init {
     if (self = [super init]) {
-
-        XMP_OptionBits options = 0;    
-
+        
+        XMP_OptionBits options = 0;
+        
         if ( ! SXMPFiles::Initialize ( options ) )
         {
             std::cout << "Could not initialize SXMPFiles.";
         }
-
+        
         if(!SXMPMeta::Initialize())
         {
             cout << "Could not initialize Toolkit!";
@@ -61,14 +65,15 @@ using namespace std;
                 // Register the namespaces
                 string actualPrefix;
                 SXMPMeta::RegisterNamespace(kDHC_NS_SDK,     "Dehancer",     &actualPrefix);
+                //SXMPMeta::SetDefaultErrorCallback(__XMPMeta_ErrorCallbackProc);                
                 
             }
             catch(XMP_Error & e)
             {
                 std::cerr << "ERROR: " << e.GetErrMsg() << " " << __FILE__ << ":" << __LINE__ << endl;;
             }
-        }        
-    }    
+        }
+    }
     return self;
 }
 

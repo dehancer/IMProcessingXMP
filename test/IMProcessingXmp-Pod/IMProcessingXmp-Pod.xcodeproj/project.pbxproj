@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,12 @@
 		317AB1A821E9D8B500A04B68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 317AB1A721E9D8B500A04B68 /* Assets.xcassets */; };
 		317AB1AB21E9D8B500A04B68 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 317AB1A921E9D8B500A04B68 /* MainMenu.xib */; };
 		317AB1B721E9D8B500A04B68 /* IMProcessingXmp_PodTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317AB1B621E9D8B500A04B68 /* IMProcessingXmp_PodTests.swift */; };
+		31A3D17C235376D8000344AA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A3D17B235376D8000344AA /* AppDelegate.m */; };
+		31A3D17F235376D8000344AA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A3D17E235376D8000344AA /* ViewController.m */; };
+		31A3D181235376D9000344AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 31A3D180235376D9000344AA /* Assets.xcassets */; };
+		31A3D184235376D9000344AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31A3D182235376D9000344AA /* Main.storyboard */; };
+		31A3D187235376D9000344AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 31A3D186235376D9000344AA /* main.m */; };
+		703E3FA100FD6D5F429CC43A /* Pods_XmpObjcTest_Pod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65ECCBE31EB690EA3D9F113E /* Pods_XmpObjcTest_Pod.framework */; };
 		C5B1BBBEE503948116ECCA85 /* Pods_IMProcessingXmp_PodTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68427D29B9A387345C83D62D /* Pods_IMProcessingXmp_PodTests.framework */; };
 		EF4619A67F4A9BF39D1E2749 /* Pods_IMProcessingXmp_Pod.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9E68E7142D8281DF61782 /* Pods_IMProcessingXmp_Pod.framework */; };
 /* End PBXBuildFile section */
@@ -44,10 +50,23 @@
 		317AB1B221E9D8B500A04B68 /* IMProcessingXmp-PodTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IMProcessingXmp-PodTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		317AB1B621E9D8B500A04B68 /* IMProcessingXmp_PodTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMProcessingXmp_PodTests.swift; sourceTree = "<group>"; };
 		317AB1B821E9D8B500A04B68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		31A3D178235376D8000344AA /* XmpObjcTest-Pod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "XmpObjcTest-Pod.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		31A3D17A235376D8000344AA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		31A3D17B235376D8000344AA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		31A3D17D235376D8000344AA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		31A3D17E235376D8000344AA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		31A3D180235376D9000344AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		31A3D183235376D9000344AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		31A3D185235376D9000344AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		31A3D186235376D9000344AA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		31A3D188235376D9000344AA /* XmpObjcTest_Pod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = XmpObjcTest_Pod.entitlements; sourceTree = "<group>"; };
 		38018C04CBC2655677F848D6 /* Pods-IMProcessingXmp-Pod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMProcessingXmp-Pod.debug.xcconfig"; path = "Target Support Files/Pods-IMProcessingXmp-Pod/Pods-IMProcessingXmp-Pod.debug.xcconfig"; sourceTree = "<group>"; };
 		38F9E68E7142D8281DF61782 /* Pods_IMProcessingXmp_Pod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMProcessingXmp_Pod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4932B58763C52C89DE79C218 /* Pods-XmpObjcTest-Pod.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XmpObjcTest-Pod.debug.xcconfig"; path = "Target Support Files/Pods-XmpObjcTest-Pod/Pods-XmpObjcTest-Pod.debug.xcconfig"; sourceTree = "<group>"; };
+		65ECCBE31EB690EA3D9F113E /* Pods_XmpObjcTest_Pod.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_XmpObjcTest_Pod.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68427D29B9A387345C83D62D /* Pods_IMProcessingXmp_PodTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IMProcessingXmp_PodTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B391624EBA7F5571A8A04CC /* Pods-IMProcessingXmp-PodTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMProcessingXmp-PodTests.debug.xcconfig"; path = "Target Support Files/Pods-IMProcessingXmp-PodTests/Pods-IMProcessingXmp-PodTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8AE6A8299B7FC7D9D24DEEF0 /* Pods-XmpObjcTest-Pod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-XmpObjcTest-Pod.release.xcconfig"; path = "Target Support Files/Pods-XmpObjcTest-Pod/Pods-XmpObjcTest-Pod.release.xcconfig"; sourceTree = "<group>"; };
 		AB53FB9BA22510E7A0871667 /* Pods-IMProcessingXmp-PodTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMProcessingXmp-PodTests.release.xcconfig"; path = "Target Support Files/Pods-IMProcessingXmp-PodTests/Pods-IMProcessingXmp-PodTests.release.xcconfig"; sourceTree = "<group>"; };
 		D9D5547531647A7396B8A786 /* Pods-IMProcessingXmp-Pod.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IMProcessingXmp-Pod.release.xcconfig"; path = "Target Support Files/Pods-IMProcessingXmp-Pod/Pods-IMProcessingXmp-Pod.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,6 +88,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		31A3D175235376D8000344AA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				703E3FA100FD6D5F429CC43A /* Pods_XmpObjcTest_Pod.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -79,6 +106,8 @@
 				D9D5547531647A7396B8A786 /* Pods-IMProcessingXmp-Pod.release.xcconfig */,
 				6B391624EBA7F5571A8A04CC /* Pods-IMProcessingXmp-PodTests.debug.xcconfig */,
 				AB53FB9BA22510E7A0871667 /* Pods-IMProcessingXmp-PodTests.release.xcconfig */,
+				4932B58763C52C89DE79C218 /* Pods-XmpObjcTest-Pod.debug.xcconfig */,
+				8AE6A8299B7FC7D9D24DEEF0 /* Pods-XmpObjcTest-Pod.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -108,6 +137,7 @@
 				313E136F21EA2A0800D9A281 /* README.md */,
 				317AB1A421E9D8B500A04B68 /* IMProcessingXmp-Pod */,
 				317AB1B521E9D8B500A04B68 /* IMProcessingXmp-PodTests */,
+				31A3D179235376D8000344AA /* XmpObjcTest-Pod */,
 				317AB1A321E9D8B500A04B68 /* Products */,
 				28ED027732470491F19BF8FA /* Pods */,
 				4281AA39137FCD92B5CD8F64 /* Frameworks */,
@@ -119,6 +149,7 @@
 			children = (
 				317AB1A221E9D8B500A04B68 /* IMProcessingXmp-Pod.app */,
 				317AB1B221E9D8B500A04B68 /* IMProcessingXmp-PodTests.xctest */,
+				31A3D178235376D8000344AA /* XmpObjcTest-Pod.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -146,11 +177,28 @@
 			path = "IMProcessingXmp-PodTests";
 			sourceTree = "<group>";
 		};
+		31A3D179235376D8000344AA /* XmpObjcTest-Pod */ = {
+			isa = PBXGroup;
+			children = (
+				31A3D17A235376D8000344AA /* AppDelegate.h */,
+				31A3D17B235376D8000344AA /* AppDelegate.m */,
+				31A3D17D235376D8000344AA /* ViewController.h */,
+				31A3D17E235376D8000344AA /* ViewController.m */,
+				31A3D180235376D9000344AA /* Assets.xcassets */,
+				31A3D182235376D9000344AA /* Main.storyboard */,
+				31A3D185235376D9000344AA /* Info.plist */,
+				31A3D186235376D9000344AA /* main.m */,
+				31A3D188235376D9000344AA /* XmpObjcTest_Pod.entitlements */,
+			);
+			path = "XmpObjcTest-Pod";
+			sourceTree = "<group>";
+		};
 		4281AA39137FCD92B5CD8F64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				38F9E68E7142D8281DF61782 /* Pods_IMProcessingXmp_Pod.framework */,
 				68427D29B9A387345C83D62D /* Pods_IMProcessingXmp_PodTests.framework */,
+				65ECCBE31EB690EA3D9F113E /* Pods_XmpObjcTest_Pod.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -197,6 +245,25 @@
 			productReference = 317AB1B221E9D8B500A04B68 /* IMProcessingXmp-PodTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		31A3D177235376D8000344AA /* XmpObjcTest-Pod */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 31A3D18B235376D9000344AA /* Build configuration list for PBXNativeTarget "XmpObjcTest-Pod" */;
+			buildPhases = (
+				E629DB5A337BA76758756D41 /* [CP] Check Pods Manifest.lock */,
+				31A3D174235376D8000344AA /* Sources */,
+				31A3D175235376D8000344AA /* Frameworks */,
+				31A3D176235376D8000344AA /* Resources */,
+				14887D9907B1C4D41BCC86E6 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "XmpObjcTest-Pod";
+			productName = "XmpObjcTest-Pod";
+			productReference = 31A3D178235376D8000344AA /* XmpObjcTest-Pod.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -204,12 +271,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = Dehancer;
 				TargetAttributes = {
 					317AB1A121E9D8B500A04B68 = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1110;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 0;
@@ -218,7 +285,11 @@
 					};
 					317AB1B121E9D8B500A04B68 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1110;
 						TestTargetID = 317AB1A121E9D8B500A04B68;
+					};
+					31A3D177235376D8000344AA = {
+						CreatedOnToolsVersion = 11.1;
 					};
 				};
 			};
@@ -237,6 +308,7 @@
 			targets = (
 				317AB1A121E9D8B500A04B68 /* IMProcessingXmp-Pod */,
 				317AB1B121E9D8B500A04B68 /* IMProcessingXmp-PodTests */,
+				31A3D177235376D8000344AA /* XmpObjcTest-Pod */,
 			);
 		};
 /* End PBXProject section */
@@ -259,6 +331,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		31A3D176235376D8000344AA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31A3D181235376D9000344AA /* Assets.xcassets in Resources */,
+				31A3D184235376D9000344AA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -268,20 +349,32 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IMProcessingXmp-PodTests/Pods-IMProcessingXmp-PodTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/IMProcessingXMP/IMProcessingXMP.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-IMProcessingXmp-PodTests/Pods-IMProcessingXmp-PodTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IMProcessingXMP.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-IMProcessingXmp-PodTests/Pods-IMProcessingXmp-PodTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IMProcessingXmp-PodTests/Pods-IMProcessingXmp-PodTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		14887D9907B1C4D41BCC86E6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-XmpObjcTest-Pod/Pods-XmpObjcTest-Pod-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-XmpObjcTest-Pod/Pods-XmpObjcTest-Pod-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-XmpObjcTest-Pod/Pods-XmpObjcTest-Pod-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2ABA3BB157704419FC250EAD /* [CP] Embed Pods Frameworks */ = {
@@ -290,16 +383,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-IMProcessingXmp-Pod/Pods-IMProcessingXmp-Pod-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/IMProcessingXMP/IMProcessingXMP.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-IMProcessingXmp-Pod/Pods-IMProcessingXmp-Pod-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IMProcessingXMP.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-IMProcessingXmp-Pod/Pods-IMProcessingXmp-Pod-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -350,6 +438,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E629DB5A337BA76758756D41 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-XmpObjcTest-Pod-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -371,6 +481,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		31A3D174235376D8000344AA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31A3D17F235376D8000344AA /* ViewController.m in Sources */,
+				31A3D187235376D9000344AA /* main.m in Sources */,
+				31A3D17C235376D8000344AA /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -388,6 +508,14 @@
 				317AB1AA21E9D8B500A04B68 /* Base */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		31A3D182235376D9000344AA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				31A3D183235376D9000344AA /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -518,6 +646,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = TCA85S5T49;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "IMProcessingXmp-Pod/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -528,7 +657,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "IMProcessingXmp-Pod/Meta/IMProcessingXmp-Pod-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -542,6 +671,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = TCA85S5T49;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "IMProcessingXmp-Pod/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -551,7 +681,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "IMProcessingXmp-Pod/Meta/IMProcessingXmp-Pod-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -574,7 +704,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Dehancer.IMProcessingXmp-PodTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IMProcessingXmp-Pod.app/Contents/MacOS/IMProcessingXmp-Pod";
 			};
 			name = Debug;
@@ -598,8 +728,50 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Dehancer.IMProcessingXmp-PodTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IMProcessingXmp-Pod.app/Contents/MacOS/IMProcessingXmp-Pod";
+			};
+			name = Release;
+		};
+		31A3D189235376D9000344AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4932B58763C52C89DE79C218 /* Pods-XmpObjcTest-Pod.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "XmpObjcTest-Pod/XmpObjcTest_Pod.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = TCA85S5T49;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "XmpObjcTest-Pod/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dehancer.XmpObjcTest-Pod";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		31A3D18A235376D9000344AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8AE6A8299B7FC7D9D24DEEF0 /* Pods-XmpObjcTest-Pod.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "XmpObjcTest-Pod/XmpObjcTest_Pod.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = TCA85S5T49;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "XmpObjcTest-Pod/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dehancer.XmpObjcTest-Pod";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -629,6 +801,15 @@
 			buildConfigurations = (
 				317AB1BF21E9D8B500A04B68 /* Debug */,
 				317AB1C021E9D8B500A04B68 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		31A3D18B235376D9000344AA /* Build configuration list for PBXNativeTarget "XmpObjcTest-Pod" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31A3D189235376D9000344AA /* Debug */,
+				31A3D18A235376D9000344AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
